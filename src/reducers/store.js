@@ -1,19 +1,19 @@
-import { createStore, bindActionCreators } from 'redux'
-import { Provider, connect } from 'react-redux'
-let Store = (state = { text: 'init' }, action) => {
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+let Store = (state = { text: 'init', isopen: false }, action) => {
 	switch(action.type){
 		case 'click':
 			return {
-				text: 'click'
+				text: 'click',
+				isopen: !state.isopen
 			}
 		case 'toggle click':
 			return {
-				text: state.text === 'click' ? 'toggle' : 'click'
+				text: action.text,
+				isopen: !state.isopen
 			}
 		default :
-			return {
-				text: 'default'
-			}
+			return state
 	}
 }
 
