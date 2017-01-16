@@ -15,18 +15,11 @@ let mapDispatchToProps = dispatch => ({
 		}
 	})
 
-class Root extends Component {
-	constructor(s) {
-		super(s)
-	}
-
-	render(){
-		let { onTest, text, isopen } = this.props
-		console.log(onTest)
-		return(
-			<div onClick={() => onTest('textasfsd')}>{text}</div>
-		)
-	}
+let Root = props => {
+	let { onTest, text, isopen } = props
+	return(
+		<div onClick={() => onTest('textasfsd')}>{text}</div>
+	)
 }
 
 export default connect(

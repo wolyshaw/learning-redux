@@ -6,7 +6,6 @@ import Root from './src/components/root'
 import Store from './src/reducers/store'
 import newStore from './src/reducers'
 let storeApp = createStore(newStore)
-console.log(storeApp.getState())
 render(
 	<Provider store={ storeApp }>
 		{
