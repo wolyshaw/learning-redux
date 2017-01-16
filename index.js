@@ -4,10 +4,14 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import Root from './src/components/root'
 import Store from './src/reducers/store'
-let storeApp = createStore(Store)
+import newStore from './src/reducers'
+let storeApp = createStore(newStore)
+console.log(storeApp.getState())
 render(
 	<Provider store={ storeApp }>
-		<Root />
+		{
+			<Root />
+		}
 	</Provider>,
 	document.getElementById('root')
 )

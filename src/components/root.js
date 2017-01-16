@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as One from '../actions/one'
 
 let mapStateToProps = state => ({
-	text: state.text,
-	isopen: state.isopen
-})
-
-let changeText = () => ({
-		type: 'toggle click',
-		text: 'changeText'
+		text: state.One.text,
+		isopen: state.One.isopen
 	})
 
 let mapDispatchToProps = dispatch => ({
-		actions: bindActionCreators({changeText: changeText}, dispatch)
+		onTest: text => {
+			dispatch(One.addOne(text))
+		}
 	})
 
 class Root extends Component {
@@ -23,9 +21,10 @@ class Root extends Component {
 	}
 
 	render(){
-		let { actions, text, isopen } = this.props
+		let { onTest, text, isopen } = this.props
+		console.log(onTest)
 		return(
-			<div onClick={actions.changeText} style={isopen ? {color: '#fff'} : {color: '#000'}} actions={ actions }>{ text }</div>
+			<div onClick={() => onTest('textasfsd')}>{text}</div>
 		)
 	}
 }
