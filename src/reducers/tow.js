@@ -1,8 +1,8 @@
-let Two = (state = { text: 'init', isopen: false }, action) => {
+let Two = (state = { msg: 'init', isopen: false }, action) => {
 	switch(action.type){
 		case 'two':
 			return {
-				text: 'click',
+				msg: action.msg,
 				isopen: !state.isopen
 			}
 		default :
