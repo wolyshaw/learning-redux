@@ -5,30 +5,27 @@ import { connect } from 'react-redux'
 import Loading from './loading'
 import * as One from '../actions/one'
 
-let testLoading = () => (
-	dispatch => setTimeout(() => dispatch(One.toggleLoding()), 3000)
-)
-
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = state => {
+	console.log(state)
 	return ({
 		text: state.One.text,
-		isopen: state.One.isopen
+		isopen: state.showLoad.isopen,
+		msg: state.showLoad.msg
 	})
 }
 
 let mapDispatchToProps = dispatch => ({
 	onTest: text => {
 		dispatch(One.addOne(text))
-		dispatch(testLoading())
-		console.log('123456789')
+		dispatch(One.getTopics({}))
 	}
 })
 
 let Root = props => {
-	let { onTest, text, isopen } = props
+	let { onTest, text, isopen, msg } = props
 	return(
 		<div>
-			<Loading/>
+			<Loading isopen={isopen} msg={msg}/>
 			<div onClick={() => onTest('textasfsd')}>{text}</div>
 		</div>
 	)

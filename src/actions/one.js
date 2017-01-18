@@ -1,9 +1,38 @@
+import fetch from 'isomorphic-fetch'
+
 export const addOne = text => ({
 	type: 'one',
 	text
 })
 
-export const toggleLoding = () => ({
-	type: 'two',
-	msg: 'test msg'
+export const setTopics = topics => ({
+	type: 'set_topics',
+	topics
 })
+
+export const getTopics = putData => {
+	return dispatch => {
+		fetch('https://cnodejs.org/api/v1/topics')
+			.then(res => res.json())
+			.then(r => dispatch(setTopics(r)))
+	}
+}
+
+export const openLoad = msg => ({
+	type: 'open_load',
+	msg
+})
+
+export const closeLoad = () => ({
+	type: 'close_load'
+})
+
+
+export const toggleLoding = load => {
+	let timer
+	return dispatch => {
+		dispatch(openLoad(load.text))
+		clearTimeout(timer)
+		timer = setTimeout(() => dispatch(closeLoad()), load.delay || 3000)
+	}
+}

@@ -1,11 +1,11 @@
 const webpack = require('webpack')
 const path = require('path')
 const publicPath = 'http://localhost:8080/'
-const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=false'
+const hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true'
 module.exports = {
   entry: ['./index.js', hotMiddlewareScript],
   output: {
-    filename: './index.min.js',
+    filename: './dist/index.min.js',
     path: path.resolve('./dist'),
     publicPath: publicPath
   },
