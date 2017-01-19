@@ -10,14 +10,6 @@ export const setTopics = topics => ({
 	topics
 })
 
-export const getTopics = putData => {
-	return dispatch => {
-		fetch('https://cnodejs.org/api/v1/topics')
-			.then(res => res.json())
-			.then(r => dispatch(setTopics(r)))
-	}
-}
-
 export const openLoad = msg => ({
 	type: 'open_load',
 	msg
@@ -34,5 +26,17 @@ export const toggleLoding = load => {
 		dispatch(openLoad(load.text))
 		clearTimeout(timer)
 		timer = setTimeout(() => dispatch(closeLoad()), load.delay || 3000)
+	}
+}
+
+export const getTopics = putData => {
+	return dispatch => {
+		dispatch(openLoad('getTopics'))
+		fetch('https://cnodejs.org/api/v1/topics')
+			.then(res => res.json())
+			.then(r => {
+				dispatch(setTopics(r))
+				dispatch(closeLoad())
+			})
 	}
 }

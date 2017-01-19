@@ -17,16 +17,15 @@ let mapStateToProps = state => {
 let mapDispatchToProps = dispatch => ({
 	onTest: text => {
 		dispatch(One.addOne(text))
-		dispatch(One.getTopics({}))
 	}
 })
 
 let Root = props => {
-	let { onTest, text, isopen, msg } = props
+	let { onTest, text, isopen, msg, children } = props
 	return(
 		<div>
+			{children}
 			<Loading isopen={isopen} msg={msg}/>
-			<div onClick={() => onTest('textasfsd')}>{text}</div>
 		</div>
 	)
 }
