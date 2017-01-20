@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as One from '../actions/one'
 
 let Topic = props => {
 	let {topic} = props
@@ -15,15 +16,25 @@ let mapStateToProps = state => ({
 	status: state.topics.success
 })
 
-let Topics = props => {
-	let {topics, status} = props
-	return(
-		<div>
-			{
-				topics.map(topic => <Topic key={topic.id} topic={topic}/>)
-			}
-		</div>
-	)
+class Topics extends Component{
+	constructor(s) {
+		super(s)
+	}
+
+	componentWillMount(){
+		this.props.dispatch(One.getTopics({}))
+	}
+
+	render(){
+		let {topics, status} = this.props
+		return(
+			<div>
+				{
+					topics.map(topic => <Topic key={topic.id} topic={topic}/>)
+				}
+			</div>
+		)
+	}
 }
 
 export default connect(
